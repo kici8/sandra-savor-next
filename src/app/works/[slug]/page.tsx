@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 // TODO: revalidate?
-export const revalidate = 60;
+export const revalidate = 0;
 
 export async function generateStaticParams() {
   const works = await fetch(
