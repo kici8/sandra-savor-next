@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
 
+// TODO: revalidate?
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const works = await fetch(
     "https://strapi-production-027c9.up.railway.app/api/works"

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // TODO: revalidate?
-// export const revalidate = 60;
+export const revalidate = 60;
 
 async function getData() {
   const res = await fetch(
