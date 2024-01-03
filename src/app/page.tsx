@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-// TODO: revalidate?
-export const revalidate = 0;
+// TODO: revalidate? I can't revalidate on netlify
+// export const revalidate = 0;
 
 async function getData() {
   const res = await fetch(
