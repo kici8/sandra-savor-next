@@ -1,11 +1,13 @@
 import Link from "next/link";
 
-// TODO: revalidate? I can't revalidate on netlify
-// export const revalidate = 0;
-
 async function getData() {
   const res = await fetch(
-    "https://strapi-production-027c9.up.railway.app/api/works"
+    "https://strapi-production-027c9.up.railway.app/api/works",
+    {
+      next: {
+        revalidate: 0,
+      },
+    }
   );
 
   if (!res.ok) {
