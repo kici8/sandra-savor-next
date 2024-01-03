@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div>
+    <div className="flex min-h-screen flex-col p-24">
       <h1 className="text-3xl font-bold">{work.attributes.title}</h1>
       <p className="text-xl">{work.attributes.description}</p>
     </div>

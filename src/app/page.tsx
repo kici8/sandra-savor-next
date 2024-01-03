@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-const getData = async () => {
+// TODO: revalidate?
+// export const revalidate = 60;
+
+async function getData() {
   const res = await fetch(
     "https://strapi-production-027c9.up.railway.app/api/works"
   );
@@ -11,13 +14,13 @@ const getData = async () => {
   }
 
   return res.json();
-};
+}
 
 export default async function Home() {
   const data = await getData();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col p-24">
       {data.data.map((work: any) => (
         <Link
           key={work.id}
