@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 export async function generateStaticParams() {
   const works = await fetch(
     "https://strapi-production-027c9.up.railway.app/api/works"
@@ -8,23 +10,24 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+async function fetchWork(slug: string) {
   const filteredWorks = await fetch(
-    `https://strapi-production-027c9.up.railway.app/api/works?filters[slug][$eq]=${params.slug}`
+    `https://strapi-production-027c9.up.railway.app/api/works?filters[slug][$eq]=${slug}`
   ).then((res) => res.json());
+  return filteredWorks.data[0];
+}
 
-  // TODO: use default Error Boundary
-  // TODO: loading state? (use suspense?) or in ssg we don't need it?
-  if (!filteredWorks || !filteredWorks.data.length) {
-    return <div>404</div>;
+export default async function Page({ params }: { params: { slug: string } }) {
+  const work = await fetchWork(params.slug);
+
+  if (!work) {
+    notFound();
   }
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">
-        {filteredWorks.data[0].attributes.title}
-      </h1>
-      <p className="text-xl">{filteredWorks.data[0].attributes.description}</p>
+      <h1 className="text-3xl font-bold">{work.attributes.title}</h1>
+      <p className="text-xl">{work.attributes.description}</p>
     </div>
   );
 }
