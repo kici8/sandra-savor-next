@@ -1,13 +1,9 @@
+import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
 async function getData() {
   const res = await fetch(
-    "https://strapi-production-027c9.up.railway.app/api/works",
-    {
-      next: {
-        revalidate: 0,
-      },
-    }
+    "https://strapi-production-027c9.up.railway.app/api/works"
   );
 
   if (!res.ok) {
@@ -19,6 +15,7 @@ async function getData() {
 }
 
 export default async function Home() {
+  revalidatePath("/");
   const data = await getData();
 
   return (
