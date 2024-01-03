@@ -1,27 +1,6 @@
 import Link from "next/link";
 
-// export async function getStaticProps() {
-//   const client = createApolloClient();
-//   const { data } = await client.query({
-//     query: gql`
-//       query Countries {
-//         countries {
-//           code
-//           name
-//           emoji
-//         }
-//       }
-//     `,
-//   });
-
-//   return {
-//     props: {
-//       countries: data.countries.slice(0, 4),
-//     },
-//   };
-// }
-
-export const getData = async () => {
+const getData = async () => {
   const res = await fetch(
     "https://strapi-production-027c9.up.railway.app/api/works"
   );
@@ -39,7 +18,7 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {data.data.map((work) => (
+      {data.data.map((work: any) => (
         <Link
           key={work.id}
           className="flex flex-col py-3"

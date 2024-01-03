@@ -3,7 +3,7 @@ export async function generateStaticParams() {
     "https://strapi-production-027c9.up.railway.app/api/works"
   ).then((res) => res.json());
 
-  return works.data.map((work) => ({
+  return works.data.map((work: any) => ({
     slug: work.attributes.slug,
   }));
 }
