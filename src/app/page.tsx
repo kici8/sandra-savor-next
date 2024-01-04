@@ -1,4 +1,3 @@
-import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
 async function getData() {
@@ -15,7 +14,6 @@ async function getData() {
 }
 
 export default async function Home() {
-  revalidatePath("/");
   const data = await getData();
 
   return (
